@@ -6,16 +6,13 @@ default:
     - docker login -u "snadn" -p "$HUB_REGISTRY_PASSWORD"
 
 variables:
-  # DOCKER_HOST: tcp://docker:2375/
-  DOCKER_CLI_EXPERIMENTAL: enabled
-  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_TLS_CERTDIR: ""
   DOCKER_DRIVER: overlay2
 
 docker-build-master:
   stage: build
   script:
-    - cat /etc/hosts
-    - docker context ls
+    - host docker
     - docker build --add-host docker:`grep docker /etc/hosts | awk 'NR==1{print $1}'` --network host --pull -t "snadn/buildx" .
     - docker push "snadn/buildx"
   only:
