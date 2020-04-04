@@ -16,7 +16,7 @@ docker-build-master:
   script:
     - cat /etc/hosts
     - docker context ls
-    - docker build --network host --pull -t "snadn/buildx" .
+    - docker build --add-host docker:`grep docker /etc/hosts | awk 'NR==1{print $1}'` --network host --pull -t "snadn/buildx" .
     - docker push "snadn/buildx"
   only:
     - master
