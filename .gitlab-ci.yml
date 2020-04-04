@@ -14,7 +14,7 @@ variables:
 docker-build-master:
   stage: build
   script:
-    - nslookup docker
+    - docker info
     - docker build --network host --pull -t "snadn/buildx" .
     - docker push "snadn/buildx"
   only:
