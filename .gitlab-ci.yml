@@ -14,7 +14,9 @@ variables:
 docker-build-master:
   stage: build
   script:
+    - docker version
     - docker info
+    - docker context ls
     - docker build --network host --pull -t "snadn/buildx" .
     - docker push "snadn/buildx"
   only:

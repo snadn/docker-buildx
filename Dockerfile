@@ -1,7 +1,7 @@
 FROM docker:latest
 
 ENV DOCKER_CLI_EXPERIMENTAL=enabled
-# ENV DOCKER_HOST=tcp://docker:2375/
+ENV DOCKER_HOST=tcp://docker:2375/
 
 RUN mkdir -p ~/.docker/cli-plugins \
   && wget -qO- https://api.github.com/repos/docker/buildx/releases/latest | grep "browser_download_url.*linux-amd64" | cut -d : -f 2,3 | tr -d '"' | xargs wget -O ~/.docker/cli-plugins/docker-buildx \
